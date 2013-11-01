@@ -17,7 +17,7 @@ Puppet::Type.type(:puppet_auth).provide(:augeas) do
     "last deny"   => "path[count(allow)=0][last()]",
   }
 
-  default_file { '/etc/puppet/auth.conf' }
+  default_file { Puppet[:rest_authconfig] }
 
   lens { 'Puppet_Auth.lns' }
 

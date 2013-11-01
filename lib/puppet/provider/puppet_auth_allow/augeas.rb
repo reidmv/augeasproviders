@@ -10,7 +10,7 @@ Puppet::Type.type(:puppet_auth_allow).provide(:augeas) do
 
   include AugeasProviders::Provider
 
-  default_file { '/etc/puppetlabs/puppet/auth.conf' }
+  default_file { Puppet[:rest_authconfig] }
 
   lens { 'Puppet_Auth.lns' }
 
