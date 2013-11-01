@@ -73,12 +73,6 @@ This parameter takes special values working as aliases:
 - destroy."
   end
 
-  newproperty(:allow, :array_matching => :all) do
-    desc "The list of hosts allowed for this rule,
-specified by hostname or cername. Regexes are allowed,
-as well as the special value `*`."
-  end
-
   newproperty(:allow_ip, :array_matching => :all) do
     desc "The list of IPs allowed for this rule.
 Requires Puppet 3.0.0 or greater."

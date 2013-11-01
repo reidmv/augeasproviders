@@ -42,15 +42,13 @@ Puppet::Type.type(:puppet_auth).provide(:augeas) do
         path_regex = aug.match("#{node}/operator[.='~']").empty? ? :false : :true
         environments = attr_aug_reader_environments(aug)
         methods = attr_aug_reader_methods(aug)
-        allow = attr_aug_reader_allow(aug)
         allow_ip = attr_aug_reader_allow_ip(aug)
         authenticated = attr_aug_reader_authenticated(aug)
         name = (path_regex == :false) ? "Auth rule for #{path}" : "Auth rule matching #{path}"
         entry = {:ensure => :present, :name => name,
                  :path => path, :path_regex => path_regex,
                  :environments => environments, :methods => methods,
-                 :allow => allow, :allow_ip => allow_ip,
-                 :authenticated => authenticated}
+                 :allow_ip => allow_ip, :authenticated => authenticated}
         resources << new(entry) if entry[:path]
       end
     end
@@ -64,7 +62,6 @@ Puppet::Type.type(:puppet_auth).provide(:augeas) do
     after = resource[:ins_after]
     environments = resource[:environments]
     methods = resource[:methods]
-    allow = resource[:allow]
     allow_ip = resource[:allow_ip]
     authenticated = resource[:authenticated]
     augopen! do |aug|
@@ -85,7 +82,6 @@ Puppet::Type.type(:puppet_auth).provide(:augeas) do
       end
       attr_aug_writer_environments(aug, environments)
       attr_aug_writer_methods(aug, methods)
-      attr_aug_writer_allow(aug, allow)
       attr_aug_writer_allow_ip(aug, allow_ip)
       attr_aug_writer_authenticated(aug, authenticated)
     end
@@ -100,12 +96,6 @@ Puppet::Type.type(:puppet_auth).provide(:augeas) do
 
   attr_aug_accessor(:methods,
     :label       => 'method',
-    :type        => :array,
-    :sublabel    => :seq,
-    :purge_ident => true
-  )
-
-  attr_aug_accessor(:allow,
     :type        => :array,
     :sublabel    => :seq,
     :purge_ident => true
