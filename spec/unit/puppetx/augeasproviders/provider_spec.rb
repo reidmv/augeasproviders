@@ -1,12 +1,12 @@
 #!/usr/bin/env rspec
 
 require 'spec_helper'
-require 'augeasproviders/provider'
+require 'puppetx/augeasproviders/provider'
 
-describe AugeasProviders::Provider do
+describe PuppetX::AugeasProviders::Provider do
   context "empty provider" do
     class Empty
-      include AugeasProviders::Provider
+      include PuppetX::AugeasProviders::Provider
       attr_accessor :resource
     end
     subject { Empty }
@@ -156,7 +156,7 @@ describe AugeasProviders::Provider do
 
   context "working provider" do
     class Test
-      include AugeasProviders::Provider
+      include PuppetX::AugeasProviders::Provider
       lens { 'Hosts.lns' }
       default_file { '/foo' }
       resource_path { |r, p| r[:test] }
@@ -188,14 +188,14 @@ describe AugeasProviders::Provider do
     end
 
     describe "#loadpath" do
-      it "should return AugeasProviders::Provider.loadpath" do
-        subject.send(:loadpath).should == AugeasProviders::Provider.loadpath
+      it "should return PuppetX::AugeasProviders::Provider.loadpath" do
+        subject.send(:loadpath).should == PuppetX::AugeasProviders::Provider.loadpath
       end
 
       it "should add libdir/augeas/lenses/ to the loadpath if it exists" do
         plugindir = File.join(Puppet[:libdir], 'augeas', 'lenses')
         File.expects(:exists?).with(plugindir).returns(true)
-        subject.send(:loadpath).should == "#{AugeasProviders::Provider.loadpath}:#{plugindir}"
+        subject.send(:loadpath).should == "#{PuppetX::AugeasProviders::Provider.loadpath}:#{plugindir}"
       end
     end
 
