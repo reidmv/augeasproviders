@@ -1,18 +1,18 @@
 # Additions for types
 
-require File.dirname(__FILE__) + '/../augeasproviders'
+require_relative '../augeasproviders'
 
 # Utilities to help write types for Puppet with Augeas-based providers.
 #
 # To use, include in the type:
 #
 #     Puppet::Type.newtype(:example) do
-#       extend AugeasProviders::Type
+#       extend PuppetX::AugeasProviders::Type
 #       # [..]
 #     end
 #
 # @api public
-module AugeasProviders::Type
+module PuppetX::AugeasProviders::Type
   # Implements `ensurable` with an additional value of `positioned`.
   #
   # When set to `positioned`, the type will call `provider.in_position?` to
