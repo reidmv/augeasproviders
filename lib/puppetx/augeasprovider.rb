@@ -1,4 +1,4 @@
 # Forward declaration
 module PuppetX; end
 
-module PuppetX::AugeasProviders; end
+module PuppetX::AugeasProvider; end

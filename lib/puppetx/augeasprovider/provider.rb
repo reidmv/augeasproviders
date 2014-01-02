@@ -4,7 +4,7 @@
 # Licensed under the Apache License, Version 2.0
 
 require 'augeas' if Puppet.features.augeas?
-require_relative '../augeasproviders'
+require_relative '../augeasprovider'
 
 # Mixin to add Augeas-related helpers to Puppet providers.
 #
@@ -15,12 +15,12 @@ require_relative '../augeasproviders'
 # To use, include in the provider:
 #
 #     Puppet::Type.type(:example).provide(:augeas) do
-#       include PuppetX::AugeasProviders::Provider
+#       include PuppetX::AugeasProvider::Provider
 #       # [..]
 #     end
 #
 # @api public
-module PuppetX::AugeasProviders::Provider
+module PuppetX::AugeasProvider::Provider
   class << self
     # Override Augeas' loadpath, usually for testing with a separate Augeas
     # checkout.
@@ -33,7 +33,7 @@ module PuppetX::AugeasProviders::Provider
   end
 
   # Class methods automatically added to a Puppet provider by including the
-  # {PuppetX::AugeasProviders::Provider} mixin.
+  # {PuppetX::AugeasProvider::Provider} mixin.
   #
   # @api public
   module ClassMethods
@@ -63,7 +63,7 @@ module PuppetX::AugeasProviders::Provider
     end
 
     # Opens Augeas and returns a handle to use.  It loads only the file
-    # for the current Puppet resource using {PuppetX::AugeasProviders::Provider::ClassMethods#lens}.
+    # for the current Puppet resource using {PuppetX::AugeasProvider::Provider::ClassMethods#lens}.
     # #augsave! is called after the block is evaluated.
     #
     # If called with a block, this will be yielded to and the Augeas handle
@@ -450,7 +450,7 @@ module PuppetX::AugeasProviders::Provider
     # @yieldreturn [String] Augeas path expression, e.g. `'/files/etc/hosts/1'`
     # @return [String] Augeas path expression to use, e.g. `'/files/etc/hosts/1'`
     # @raise [Puppet::Error] if no default file block is set and no resource is passed
-    # @see PuppetX::AugeasProviders::Provider#resource_path
+    # @see PuppetX::AugeasProvider::Provider#resource_path
     # @see #target
     # @api public
     def resource_path(resource = nil, &block)
@@ -495,7 +495,7 @@ module PuppetX::AugeasProviders::Provider
     # @param [Puppet::Resource] resource resource being evaluated
     # @return [String] path expression representing the file being managed
     # @raise [Puppet::Error] if no default block is set and no resource is passed
-    # @see PuppetX::AugeasProviders::Provider#target
+    # @see PuppetX::AugeasProvider::Provider#target
     # @see #resource_path
     # @api public
     def target(resource = nil)
@@ -524,7 +524,7 @@ module PuppetX::AugeasProviders::Provider
     #
     # @return [String] colon-separated string of module paths, or nil if defaults are to be used
     def loadpath
-      loadpath = PuppetX::AugeasProviders::Provider.loadpath
+      loadpath = PuppetX::AugeasProvider::Provider.loadpath
       plugins = File.join(Puppet[:libdir], 'augeas', 'lenses')
       if File.exists?(plugins)
         loadpath = loadpath.to_s.split(File::PATH_SEPARATOR).push(plugins).join(File::PATH_SEPARATOR)
@@ -596,7 +596,7 @@ module PuppetX::AugeasProviders::Provider
   end
 
   # Opens Augeas and returns a handle to use.  It loads only the file
-  # for the current Puppet resource using {PuppetX::AugeasProviders::Provider::ClassMethods#lens}.
+  # for the current Puppet resource using {PuppetX::AugeasProvider::Provider::ClassMethods#lens}.
   #
   # If called with a block, this will be yielded to and the Augeas handle
   # closed after the block has executed.  Otherwise, the handle will be
@@ -618,7 +618,7 @@ module PuppetX::AugeasProviders::Provider
   end
 
   # Opens Augeas and returns a handle to use.  It loads only the file
-  # for the current Puppet resource using {PuppetX::AugeasProviders::Provider::ClassMethods#lens}.
+  # for the current Puppet resource using {PuppetX::AugeasProvider::Provider::ClassMethods#lens}.
   # #augsave! is called after the block is evaluated.
   #
   # If called with a block, this will be yielded to and the Augeas handle
@@ -682,7 +682,7 @@ module PuppetX::AugeasProviders::Provider
   # expression representing the top-level of the file.
   #
   # @return [String] Augeas path expression to use, e.g. `'/files/etc/hosts/1'`
-  # @see PuppetX::AugeasProviders::Provider::ClassMethods#resource_path
+  # @see PuppetX::AugeasProvider::Provider::ClassMethods#resource_path
   # @see #target
   # @api public
   def resource_path
@@ -711,7 +711,7 @@ module PuppetX::AugeasProviders::Provider
   # current Puppet resource.
   #
   # @return [String] path expression representing the file being managed
-  # @see PuppetX::AugeasProviders::Provider::ClassMethods#target
+  # @see PuppetX::AugeasProvider::Provider::ClassMethods#target
   # @see #resource_path
   # @api public
   def target

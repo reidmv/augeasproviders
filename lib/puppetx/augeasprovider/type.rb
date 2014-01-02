@@ -1,18 +1,18 @@
 # Additions for types
 
-require_relative '../augeasproviders'
+require_relative '../augeasprovider'
 
 # Utilities to help write types for Puppet with Augeas-based providers.
 #
 # To use, include in the type:
 #
 #     Puppet::Type.newtype(:example) do
-#       extend PuppetX::AugeasProviders::Type
+#       extend PuppetX::AugeasProvider::Type
 #       # [..]
 #     end
 #
 # @api public
-module PuppetX::AugeasProviders::Type
+module PuppetX::AugeasProvider::Type
   # Implements `ensurable` with an additional value of `positioned`.
   #
   # When set to `positioned`, the type will call `provider.in_position?` to
