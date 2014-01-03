@@ -1,3 +1,11 @@
+# THIS IS A SNAPSHOT
+
+This is a snapshot and point-in-time minor refactor of the
+[hercules-team/augeasproviders](https://github.com/hercules-team/augeasproviders)
+module. It is intended to be abandoned at some point in the future when/if
+[augeasproviders/issues/59](https://github.com/hercules-team/augeasproviders/issues/59)
+is resolved.
+
 # augeasproviders: alternative Augeas-based providers for Puppet
 
 This module provides a framework for implementing native Puppet types using the
