@@ -4,7 +4,7 @@
 # Licensed under the Apache License, Version 2.0
 
 require 'augeas' if Puppet.features.augeas?
-require_relative '../augeasprovider'
+require 'puppetx/augeasprovider'
 
 # Mixin to add Augeas-related helpers to Puppet providers.
 #

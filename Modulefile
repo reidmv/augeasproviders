@@ -1,5 +1,5 @@
 name    'reidmv-augeasprovider'
-version '0.0.1'
+version '0.0.2'
 source 'git://github.com/reidmv/puppet-module-augeasprovider/tree/core_only'
 author 'Dominic Cleal, Raphael Pinson'
 license 'Apache 2.0'

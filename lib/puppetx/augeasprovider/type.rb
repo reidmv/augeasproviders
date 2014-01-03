@@ -1,6 +1,6 @@
 # Additions for types
 
-require_relative '../augeasprovider'
+require 'puppetx/augeasprovider'
 
 # Utilities to help write types for Puppet with Augeas-based providers.
 #
